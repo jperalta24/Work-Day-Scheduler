@@ -7,8 +7,8 @@ function init() {
     for (i = 0; i < timeBlocks.length; i++) {
     const timeBlock = timeBlocks[i];
     console.log(localStorage.getItem(timeBlock.id));
-    // const timeBlock = timeBlocks[i];
-    // timeBlock.textContent = localStorage.getItem(timeBlock.id);
+    
+    timeBlock.innerText = localStorage.getItem(timeBlock.id);
   }
 }
 
