@@ -1,6 +1,16 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+let timeBlocks = $(".time-block");
+
+function init() {
+    for (i = 0; i < timeBlocks.length; i++) {
+    const timeBlock = timeBlocks[i];
+    console.log(localStorage.getItem(timeBlock.id));
+    // const timeBlock = timeBlocks[i];
+    // timeBlock.textContent = localStorage.getItem(timeBlock.id);
+  }
+}
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
@@ -13,30 +23,62 @@ $(function () {
   // used to move through the dom to target "this" button's parent with with an "id" attr
   let saveBtn = $(".saveBtn");
   saveBtn.on('click', function () {
-      let textBlock = $(this).siblings('.description').val(); 
-      let timeBlock = $(this).parent().attr("id");
-      localStorage.setItem(timeBlock, textBlock );
-      console.log(textBlock);
-      console.log(timeBlock);
-    
-    });
+    let textBlock = $(this).siblings('.description').val();
+    let timeBlock = $(this).parent().attr("id");
+    localStorage.setItem(timeBlock, textBlock);
+    // console.log(textBlock);
+    // console.log(timeBlock)
+  });
   //
   // TODO: Add code to apply the past, present, or future class to each time
+
+  // let currentTime = dayjs().hour();
+  // console.log(currentTime);
+  // console.log(timeBlocks);
+  for (let index = 0; index < timeBlocks.length; index++) {
+    const timeBlock = timeBlocks[index];
+    // splits the content inside the id and targets the second object 
+    const hour = timeBlock.id.split("-")[1];
+    // console.log(hour);
+    if (hour == dayjs().hour()) {
+      timeBlock.classList.add("present");
+
+      // console.log(timeBlock)
+
+    }
+    else if (hour < dayjs().hour()) {
+      timeBlock.classList.add("past");
+    }
+    else if (hour > dayjs().hour()) {
+      timeBlock.classList.add("future");
+    }
+  }
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time? dayjs().hour() // gets current hour
+  // current hour in 24-hour time? **dayjs().hour() - gets current hour
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
+  
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
+  
   // TODO: Add code to display the current date in the header of the page.
-  let currentDay = dayjs().format("ddd, MMMM D, YYYY hh:m A");
-$('#currentDay').text(currentDay);
+ 
+  function timeNow() {
+    let currentDay = dayjs().format("ddd, MMMM D, YYYY hh:m:ss A");
+    $('#currentDay').text(currentDay);
+  
+  }
+  setInterval(timeNow, 1000);
+    
+  
 });
 
 
+
+init();
 // GIVEN I am using a daily planner to create a schedule
 // WHEN I open the planner
 // THEN the current day is displayed at the top of the calendar
