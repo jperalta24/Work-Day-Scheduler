@@ -2,15 +2,18 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 let timeBlocks = $(".time-block");
+// let textArea = $("textarea");
 
-function init() {
-    for (i = 0; i < timeBlocks.length; i++) {
-    const timeBlock = timeBlocks[i];
-    console.log(localStorage.getItem(timeBlock.id));
-    
-    timeBlock.innerText = localStorage.getItem(timeBlock.id);
-  }
-}
+
+// function init() {
+//   for (i = 0; i < timeBlocks.length; i++) {
+//   const timeBlock = textArea[i];
+//   console.log(localStorage.getItem(timeBlock.id));
+  
+//   timeBlock.innerText = localStorage.getItem(timeBlocks.id);
+//   console.log(textArea.innerText);
+// }
+// }
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
@@ -62,7 +65,16 @@ $(function () {
   
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  //
+  $('#hour-9 .description').val(localStorage.getItem("hour-9"));
+  $('#hour-10 .description').val(localStorage.getItem("hour-10"));
+  $('#hour-11 .description').val(localStorage.getItem("hour-11"));
+  $('#hour-12 .description').val(localStorage.getItem("hour-12"));
+  $('#hour-13 .description').val(localStorage.getItem("hour-13"));
+  $('#hour-14 .description').val(localStorage.getItem("hour-14"));
+  $('#hour-15 .description').val(localStorage.getItem("hour-15"));
+  $('#hour-16 .description').val(localStorage.getItem("hour-16"));
+
+  
   
   // TODO: Add code to display the current date in the header of the page.
  
@@ -73,12 +85,12 @@ $(function () {
   }
   setInterval(timeNow, 1000);
     
-  
+ 
 });
 
+// init();
 
 
-init();
 // GIVEN I am using a daily planner to create a schedule
 // WHEN I open the planner
 // THEN the current day is displayed at the top of the calendar
